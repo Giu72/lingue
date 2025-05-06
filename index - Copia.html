@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Colore di fallback */
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            
+            /* Effetto Terra con trasparenza */
+            background: 
+                radial-gradient(circle at 70% 30%, 
+                    rgba(220, 220, 220, 0.6) 0%, 
+                    rgba(180, 180, 180, 0.6) 70%),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/1200px-The_Earth_seen_from_Apollo_17.jpg') center/cover no-repeat;
+            
+            filter: grayscale(70%) brightness(1.5) opacity(0.6);
+            mix-blend-mode: lighten;
+            
+            /* Effetto di diffusione del messaggio */
+            box-shadow: inset 0 0 150px rgba(255, 255, 255, 0.7);
+        }
+        
+        .content {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Sfondo semi-trasparente per il contenuto */
+            max-width: 800px;
+            margin: 50px auto;
+            border-radius: 10px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nova</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 450px;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .language-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            max-height: 350px; /* Altezza fissa del box */
+            overflow-y: auto; /* Scorrimento verticale */
+            padding-right: 10px; /* Spazio per la scrollbar */
+        }
+        .language-item {
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px 0;
+            background-color: #eceeef;
+            color: #333;
+            border-radius: 5px;
+            width: 50%; /* Allarga il pulsante */
+            text-align: center;
+            box-sizing: border-box;
+            white-space: nowrap; /* Impedisce il ritorno a capo */
+            overflow-x: visible; /* Permette al testo di uscire dal contenitore se necessario */
+        }
+        .language-item:hover {
+            background-color: #dcdcdc;
+        }
+        .audio-box {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #eceeef;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            max-width: 100%;
+            
+        }
+        .audio-box span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       <div class="title">Scegli la lingua</div>
+        
+        <!-- Box scorrevole -->
+        <div class="language-list">
+            <div class="language-item" onclick="changeLanguage('sq')">Albanese</div>
+            <div class="language-item" onclick="changeLanguage('ar')">Arabo</div>
+            <div class="language-item" onclick="changeLanguage('bn')">Bengalese</div>
+            <div class="language-item" onclick="changeLanguage('bg')">Bulgaro</div>
+            <div class="language-item" onclick="changeLanguage('cs')">Ceco</div>
+            <div class="language-item" onclick="changeLanguage('zh')">Cinese</div>
+            <div class="language-item" onclick="changeLanguage('hr')">Croato</div>
+            <div class="language-item" onclick="changeLanguage('da')">Danese</div>
+            <div class="language-item" onclick="changeLanguage('et')">Estone</div>
+            <div class="language-item" onclick="changeLanguage('fi')">Finlandese</div>
+            <div class="language-item" onclick="changeLanguage('fr')">Francese</div>
+            <div class="language-item" onclick="changeLanguage('el')">Greco</div>
+            <div class="language-item" onclick="changeLanguage('hi')">Hindi</div>
+            <div class="language-item" onclick="changeLanguage('ja')">Giapponese</div>
+            <div class="language-item" onclick="changeLanguage('nl')">Olandese</div>
+            <div class="language-item" onclick="changeLanguage('no')">Norvegese</div>
+            <div class="language-item" onclick="changeLanguage('fa')">Persiano</div>
+            <div class="language-item" onclick="changeLanguage('pl')">Polacco</div>
+            <div class="language-item" onclick="changeLanguage('pt')">Portoghese</div>
+            <div class="language-item" onclick="changeLanguage('ro')">Rumeno</div>
+            <div class="language-item" onclick="changeLanguage('en')">English</div>
+            <div class="language-item" onclick="changeLanguage('it')">Italiano</div>
+            <div class="language-item" onclick="changeLanguage('ru')">Russo</div>
+            <div class="language-item" onclick="changeLanguage('es')">Spagnolo</div>
+            <div class="language-item" onclick="changeLanguage('sv')">Svedese</div>
+            <div class="language-item" onclick="changeLanguage('de')">Tedesco</div>
+            <div class="language-item" onclick="changeLanguage('tr')">Turco</div>
+            
+
+            
+            
+        </div>
+
+        <!-- Box audio -->
+        <div class="audio-box" id="audio-box">
+            <h3 id="title"></h3>
+            <div id="audio-text"></div>
+        </div>
+    </div>
+
+<script>
+    function changeLanguage(language) {
+        let title = document.getElementById('title');
+        let audioText = document.getElementById('audio-text');
+        speechSynthesis.cancel();
+
+        if (language === 'ar') {
+            title.innerHTML = 'اختر اللغة';
+            audioText.innerHTML = 'صباح الخير. هل يمكنني أن أطرح عليك سؤالاً؟ هل تعرف أكثر موقع إلكتروني تمت ترجمته في العالم؟ إنه موقع JW.ORG، مجاني ومترجم إلى أكثر من 1000 لغة. يحتوي على مواضيع وفيديوهات مفيدة لجميع الناس. إذا كنت ترغب، يمكنك أخذ البطاقة. شكراً لك على اهتمامك. أتمنى لك يومًا سعيدًا.';
+            speak(audioText.innerHTML, 'ar-SA');
+        } else if (language === 'bn') {
+            title.innerHTML = 'ভাষা নির্বাচন করুন';
+            audioText.innerHTML = 'সুপ্রভাত। আমি আপনাকে একটি প্রশ্ন করতে পারি? আপনি কি বিশ্বের সবচেয়ে অনূদিত ওয়েবসাইটটি জানেন? এটি JW.ORG, বিনামূল্যে এবং ১০০০টিরও বেশি ভাষায় অনূদিত। এতে সমস্ত মানুষের জন্য উপকারী বিষয় এবং ভিডিও রয়েছে। যদি আপনি চান, আপনি কার্ডটি নিতে পারেন। আপনার মনোযোগের জন্য ধন্যবাদ। আপনার দিনটি শুভ হোক।';
+            speak(audioText.innerHTML, 'bn-BD');
+        } else if (language === 'bg') {
+            title.innerHTML = 'Изберете език';
+            audioText.innerHTML = 'Добро утро. Мога ли да ви задам въпрос? Знаете ли най-превеждания уебсайт в света? Това е JW.ORG, безплатен и преведен на над 1000 езика. Той съдържа полезни теми и видеоклипове за всички хора. Ако желаете, можете да вземете картата. Благодаря ви за вниманието. Приятен ден.';
+            speak(audioText.innerHTML, 'bg-BG');
+        } else if (language === 'cs') {
+            title.innerHTML = 'Vyberte jazyk';
+            audioText.innerHTML = 'Dobré ráno. Můžu se vás zeptat na otázku? Znáte nejvíce přeloženou webovou stránku na světě? Je to JW.ORG, zdarma a přeloženo do více než 1000 jazyků. Obsahuje užitečná témata a videa pro všechny lidi. Pokud chcete, můžete si vzít lístek. Děkujeme za vaši pozornost. Pěkný den.';
+            speak(audioText.innerHTML, 'cs-CZ');
+        } else if (language === 'zh') {
+            title.innerHTML = '选择语言';
+            audioText.innerHTML = '早上好。我可以问你一个问题吗？你知道世界上翻译最多的网站吗？它是JW.ORG，免费并被翻译成1000多种语言。它包含对所有人有用的主题和视频。如果你愿意，可以拿一张卡片。感谢您的关注。祝你有美好的一天。';
+            speak(audioText.innerHTML, 'zh-CN');
+        } else if (language === 'hr') {
+            title.innerHTML = 'Odaberite jezik';
+            audioText.innerHTML = 'Dobro jutro. Mogu li vam postaviti pitanje? Znate li najviše prevedenu web stranicu na svijetu? To je JW.ORG, besplatno i prevedeno na više od 1000 jezika. Sadrži korisne teme i videozapise za sve ljude. Ako želite, možete uzeti karticu. Hvala vam na pažnji. Ugodan dan.';
+            speak(audioText.innerHTML, 'hr-HR');
+        } else if (language === 'da') {
+            title.innerHTML = 'Vælg sprog';
+            audioText.innerHTML = 'Godmorgen. Må jeg stille dig et spørgsmål? Kender du den mest oversatte hjemmeside i verden? Det er JW.ORG, gratis og oversat til over 1000 sprog. Den indeholder nyttige emner og videoer til alle mennesker. Hvis du vil, kan du tage kortet. Tak for din opmærksomhed. Hav en god dag.';
+            speak(audioText.innerHTML, 'da-DK');
+        } else if (language === 'fi') {
+            title.innerHTML = 'Valitse kieli';
+            audioText.innerHTML = 'Hyvää huomenta. Voinko kysyä sinulta kysymyksen? Tiedätkö maailman eniten käännetyn verkkosivuston? Se on JW.ORG, ilmainen ja käännetty yli 1000 kielelle. Siinä on hyödyllisiä aiheita ja videoita kaikille ihmisille. Jos haluat, voit ottaa kortin. Kiitos huomiostasi. Hyvää päivänjatkoa.';
+            speak(audioText.innerHTML, 'fi-FI');
+        } else if (language === 'fr') {
+            title.innerHTML = 'Choisissez la langue';
+            audioText.innerHTML = 'Bonjour. Puis-je vous poser une question? Connaissez-vous le site Web le plus traduit au monde? Il s\'agit de JW.ORG, gratuit et traduit dans plus de 1000 langues. Il contient des sujets et des vidéos utiles pour tous. Si vous le souhaitez, vous pouvez prendre la carte. Merci de votre attention. Bonne journée.';
+            speak(audioText.innerHTML, 'fr-FR');
+        } else if (language === 'el') {
+            title.innerHTML = 'Επιλέξτε γλώσσα';
+            audioText.innerHTML = 'Καλημέρα. Μπορώ να σας κάνω μια ερώτηση; Ξέρετε ποιος είναι ο πιο μεταφρασμένος ιστότοπος στον κόσμο; Είναι το JW.ORG, δωρεάν και μεταφρασμένο σε περισσότερες από 1000 γλώσσες. Περιέχει χρήσιμα θέματα και βίντεο για όλους τους ανθρώπους. Αν θέλετε, μπορείτε να πάρετε την κάρτα. Σας ευχαριστούμε για την προσοχή σας. Να έχετε μια όμορφη μέρα.';
+            speak(audioText.innerHTML, 'el-GR');
+        } else if (language === 'hi') {
+            title.innerHTML = 'भाषा चुनें';
+            audioText.innerHTML = 'सुप्रभात। क्या मैं आपसे एक सवाल पूछ सकता हूँ? क्या आप जानते हैं कि दुनिया में सबसे अधिक अनुवादित वेबसाइट कौन सी है? यह JW.ORG है, जो मुफ्त में उपलब्ध है और 1000 से अधिक भाषाओं में अनुवादित है। इसमें सभी लोगों के लिए उपयोगी विषय और वीडियो हैं। यदि आप चाहें, तो कार्ड ले सकते हैं। आपके ध्यान देने के लिए धन्यवाद। आपका दिन शुभ हो।';
+            speak(audioText.innerHTML, 'hi-IN');
+        } else if (language === 'ja') {
+            title.innerHTML = '言語を選択';
+            audioText.innerHTML = 'おはようございます。質問してもいいですか？ 世界で最も翻訳されたウェブサイトをご存知ですか？ それはJW.ORGで、無料で1000以上の言語に翻訳されています。すべての人々にとって役立つトピックやビデオが含まれています。ご希望であれば、カードをお取りください。ご清聴ありがとうございました。良い一日を。';
+            speak(audioText.innerHTML, 'ja-JP');
+        } else if (language === 'nl') {
+            title.innerHTML = 'Kies een taal';
+            audioText.innerHTML = 'Goedemorgen. Mag ik u een vraag stellen? Weet u wat de meest vertaalde website ter wereld is? Dat is JW.ORG, gratis en vertaald in meer dan 1000 talen. Het bevat nuttige onderwerpen en video\'s voor alle mensen. Als u wilt, kunt u het kaartje meenemen. Dank u voor uw aandacht. Fijne dag.';
+            speak(audioText.innerHTML, 'nl-NL');
+        } else if (language === 'no') {
+            title.innerHTML = 'Velg språk';
+            audioText.innerHTML = 'God morgen. Kan jeg stille deg et spørsmål? Vet du hvilken nettside som er mest oversatt i verden? Det er JW.ORG, gratis og oversatt til over 1000 språk. Den inneholder nyttige emner og videoer for alle mennesker. Hvis du vil, kan du ta kortet. Takk for oppmerksomheten. Ha en fin dag.';
+            speak(audioText.innerHTML, 'no-NO');
+        } else if (language === 'pl') {
+            title.innerHTML = 'Wybierz język';
+            audioText.innerHTML = 'Dzień dobry. Czy mogę zadać ci pytanie? Czy wiesz, która strona internetowa jest najbardziej tłumaczona na świecie? To JW.ORG, darmowa i przetłumaczona na ponad 1000 języków. Zawiera przydatne tematy i filmy dla wszystkich ludzi. Jeśli chcesz, możesz wziąć kartkę. Dziękujemy za uwagę. Miłego dnia.';
+            speak(audioText.innerHTML, 'pl-PL');
+        } else if (language === 'pt') {
+            title.innerHTML = 'Escolha o idioma';
+            audioText.innerHTML = 'Bom dia. Posso te fazer uma pergunta? Você sabe qual é o site mais traduzido do mundo? É o JW.ORG, gratuito e traduzido para mais de 1000 idiomas. Ele contém tópicos e vídeos úteis para todas as pessoas. Se quiser, pode pegar o cartão. Obrigado pela sua atenção. Tenha um bom dia.';
+            speak(audioText.innerHTML, 'pt-PT');
+        } else if (language === 'pa') {
+            title.innerHTML = 'ਭਾਸ਼ਾ ਚੁਣੋ';
+            audioText.innerHTML = 'ਸਤ ਸ੍ਰੀ ਅਕਾਲ। ਕੀ ਮੈਂ ਤੁਹਾਨੂੰ ਇੱਕ ਸਵਾਲ ਪੁੱਛ ਸਕਦਾ ਹਾਂ? ਤੁਸੀਂ ਜਾਣਦੇ ਹੋ ਕਿ ਦੁਨੀਆਂ ਦੀ ਸਭ ਤੋਂ ਵੱਧ ਅਨੁਵਾਦ ਕੀਤੀ ਗਈ ਵੈੱਬਸਾਈਟ ਕਿਹੜੀ ਹੈ? ਇਹ JW.ORG ਹੈ, ਮੁਫ਼ਤ ਅਤੇ 1000 ਤੋਂ ਵੱਧ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਇਸ ਵਿੱਚ ਸਾਰੇ ਲੋਕਾਂ ਲਈ ਲਾਭਦਾਇਕ ਵਿਸ਼ੇ ਅਤੇ ਵੀਡੀਓ ਹਨ। ਜੇਕਰ ਤੁਸੀਂ ਚਾਹੋ ਤਾਂ ਤੁਸੀਂ ਕਾਰਡ ਲੈ ਸਕਦੇ ਹੋ। ਤੁਹਾਡੇ ਧਿਆਨ ਲਈ ਧੰਨਵਾਦ। ਤੁਹਾਡਾ ਦਿਨ ਚੰਗਾ ਰਹੇ।';
+            speak(audioText.innerHTML, 'pa-IN');
+        } else if (language === 'ro') {
+            title.innerHTML = 'Alegeți limba';
+            audioText.innerHTML = 'Bună dimineața. Pot să vă pun o întrebare? Știți care este cel mai tradus site din lume? Este JW.ORG, gratuit și tradus în peste 1000 de limbi. Conține subiecte și videoclipuri utile pentru toți oamenii. Dacă doriți, puteți lua cartonașul. Vă mulțumim pentru atenție. O zi bună.';
+            speak(audioText.innerHTML, 'ro-RO');
+        } else if (language === 'en') {
+            title.innerHTML = 'Choose Language';
+            audioText.innerHTML = 'Good morning. May I ask you a question? Do you know the most translated website in the world? It is JW.ORG, free and translated into more than 1000 languages. It contains useful topics and videos for all people. If you wish, you can take the card. Thank you for your attention. Have a nice day.';
+            speak(audioText.innerHTML, 'en-US');
+        } else if (language === 'it') {
+            title.innerHTML = 'Scegli la lingua';
+            audioText.innerHTML = 'Buongiorno. Posso farti una domanda? Conosci il sito web più tradotto al mondo? È il sito JW.ORG gratuito e tradotto in più di 1000 lingue. Contiene argomenti e video utili per tutte le persone. Se lo desideri puoi prendere il biglietto. Grazie per la tua attenzione. Buona giornata.';
+            speak(audioText.innerHTML, 'it-IT');
+        }else if (language === 'ru') {
+    title.innerHTML = 'Выберите язык';
+    audioText.innerHTML = 'Доброе утро. Могу я задать вам вопрос? Знаете ли вы самый переведённый сайт в мире? Это JW.ORG, бесплатный и переведённый более чем на 1000 языков. Он содержит полезные темы и видео для всех людей. Если хотите, можете взять билет. Спасибо за ваше внимание. Хорошего дня.';
+    speak(audioText.innerHTML, 'ru-RU');
+} 
+        
+        
+        else if (language === 'es') {
+    title.innerHTML = 'Elige el idioma';
+    audioText.innerHTML = 'Buenos días. ¿Puedo hacerte una pregunta? ¿Conoces el sitio web más traducido del mundo? Es JW.ORG, gratuito y traducido a más de 1000 idiomas. Contiene temas y vídeos útiles para todas las personas. Si lo deseas, puedes tomar el boleto. Gracias por tu atención. Que tengas un buen día.';
+    speak(audioText.innerHTML, 'es-ES');
+} 
+        
+        
+        else if (language === 'sv') {
+    title.innerHTML = 'Välj språk';
+    audioText.innerHTML = 'God morgon. Får jag ställa en fråga? Känner du till den mest översatta webbplatsen i världen? Det är JW.ORG, gratis och översatt till över 1000 språk. Den innehåller användbara ämnen och videor för alla människor. Om du vill kan du ta biljetten. Tack för din uppmärksamhet. Ha en bra dag.';
+    speak(audioText.innerHTML, 'sv-SE');
+}
+else if (language === 'de') {
+    title.innerHTML = 'Sprache wählen';
+    audioText.innerHTML = 'Guten Tag. Darf ich Ihnen eine Frage stellen? Kennen Sie die am meisten übersetzte Website der Welt? Es ist JW.ORG, kostenlos und in über 1000 Sprachen übersetzt. Es enthält nützliche Themen und Videos für alle Menschen. Wenn Sie möchten, können Sie das Ticket nehmen. Vielen Dank für Ihre Aufmerksamkeit. Einen schönen Tag noch.';
+    speak(audioText.innerHTML, 'de-DE');
+} 
+ else if (language === 'tr') {
+    title.innerHTML = 'Dil seçin';
+    audioText.innerHTML = 'Günaydın. Size bir soru sorabilir miyim? Dünyanın en çok çevrilen web sitesini biliyor musunuz? JW.ORG, ücretsizdir ve 1000\'den fazla dile çevrilmiştir. Tüm insanlar için faydalı konular ve videolar içerir. İsterseniz bileti alabilirsiniz. İlginiz için teşekkür ederim. İyi günler.';
+    speak(audioText.innerHTML, 'tr-TR');
+}
+else if (language === 'sq') {
+    title.innerHTML = 'Zgjidhni gjuhën';
+    audioText.innerHTML = 'Mirëmëngjes. A mund t\'ju bëj një pyetje? A e njihni faqen e internetit më të përkthyer në botë? Është faqja JW.ORG, falas dhe e përkthyer në më shumë se 1000 gjuhë. Përmban tema dhe video të dobishme për të gjithë njerëzit. Nëse dëshironi, mund të merrni biletën. Faleminderit për vëmendjen tuaj. Ditë të mbarë.';
+    speak(audioText.innerHTML, 'sq-AL');
+}
+else if (language === 'et') {
+    title.innerHTML = 'Valige keel';
+    audioText.innerHTML = 'Tere hommikust. Kas ma võin teilt midagi küsida? Kas te teate maailma kõige rohkem tõlgitud veebisaiti? See on JW.ORG, tasuta ja tõlgitud enam kui 1000 keelde. See sisaldab kasulikke teemasid ja videoid kõigile inimestele. Soovi korral võite võtta pileti. Tänan teid tähelepanu eest. Head päeva.';
+    speak(audioText.innerHTML, 'et-EE');
+}
+else if (language === 'fa') {
+    title.innerHTML = 'زبان را انتخاب کنید';
+    audioText.innerHTML = 'صبح بخیر. می‌توانم یک سوال بپرسم؟ آیا می‌دانید پربیشترین ترجمه‌شده‌ترین وب‌سایت جهان چیست؟ این سایت JW.ORG است که رایگان و به بیش از 1000 زبان ترجمه شده است. شامل موضوعات و ویدیوهای مفیدی برای همه مردم است. اگر مایل باشید می‌توانید یک بروشور بردارید. از توجه شما سپاسگزارم. روز خوبی داشته باشید.';
+    speak(audioText.innerHTML, 'fa-IR');
+}
+
+
+       
+    }
+
+    function speak(text, lang) {
+        var utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang;
+        speechSynthesis.speak(utterance);
+    }
+</script>
+</body>
+</html>
